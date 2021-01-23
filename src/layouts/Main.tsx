@@ -16,8 +16,8 @@ const Main: React.FC<Props> = ({ children }): React.ReactElement => {
       bg="white.ghost"
     >
       <Sidebar />
-      <VStack as="main" flex="2" bg="blue.100" minH="100vh">
-        <div>{children}</div>
+      <VStack as="main" flex="2" minH="100vh">
+        {children}
       </VStack>
       <ProfileSection />
     </Flex>

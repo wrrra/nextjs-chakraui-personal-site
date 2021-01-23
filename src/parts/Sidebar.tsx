@@ -2,19 +2,13 @@ import {
   Flex,
   Icon,
   IconButton,
-  Text,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import {
-  VscAccount,
-  VscFile,
-  VscHome,
-  VscPackage,
-  VscSearch,
-  VscThreeBars,
-} from "react-icons/vsc";
+import { VscAccount, VscThreeBars } from "react-icons/vsc";
+import CustomMenuItem from "../components/MenuItem";
+import { menuData, TypeMenuData } from "../data/nav-menu";
 
 function Sidebar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -39,59 +33,16 @@ function Sidebar() {
         icon={<Icon boxSize="6" as={VscThreeBars} />}
       />
       <VStack mt="8" spacing="4">
-        <Flex alignItems="center">
-          <IconButton
-            variant="ghost"
-            isActive={true}
-            aria-label="nav-menu"
-            size="lg"
-            icon={<Icon boxSize="6" as={VscHome} />}
-          />{" "}
-          {isOpen && (
-            <Text flex="1" mx="4">
-              Menu Name
-            </Text>
-          )}
-        </Flex>
-        <Flex alignItems="center">
-          <IconButton
-            variant="ghost"
-            aria-label="nav-menu"
-            size="lg"
-            icon={<Icon boxSize="6" as={VscSearch} />}
-          />{" "}
-          {isOpen && (
-            <Text flex="1" mx="4">
-              Menu Name
-            </Text>
-          )}
-        </Flex>
-        <Flex alignItems="center">
-          <IconButton
-            variant="ghost"
-            aria-label="nav-menu"
-            size="lg"
-            icon={<Icon boxSize="6" as={VscFile} />}
-          />{" "}
-          {isOpen && (
-            <Text flex="1" mx="4">
-              Menu Name
-            </Text>
-          )}
-        </Flex>
-        <Flex alignItems="center">
-          <IconButton
-            variant="ghost"
-            aria-label="nav-menu"
-            size="lg"
-            icon={<Icon boxSize="6" as={VscPackage} />}
-          />{" "}
-          {isOpen && (
-            <Text flex="1" mx="4">
-              Menu Name
-            </Text>
-          )}
-        </Flex>
+        {menuData &&
+          menuData.map((menuItem: TypeMenuData, index: number) => (
+            <CustomMenuItem
+              menuIcon={menuItem.icon}
+              menuLabel={menuItem.label}
+              key={index}
+              menuIsActive={index == 0 && true}
+              drawerIsOpen={isOpen}
+            />
+          ))}
       </VStack>
       <IconButton
         variant="ghost"
